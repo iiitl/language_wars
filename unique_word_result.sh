@@ -24,14 +24,10 @@ for file in "$@"; do
   fi
 done
 
-tmp_file=$(mktemp)
-
 cat "$@" | \
 tr '[:upper:]' '[:lower:]' | \
 tr -s '[:space:]' '\n' | \
-LC_ALL=C sort --parallel=12 -u --output="$tmp_file"
-
-mv "$tmp_file" "$output_file"
+LC_ALL=C sort --parallel=12 -u --output="$output_file"
 
 echo "Processing complete. Results written to '$output_file'."
 
